@@ -69,6 +69,7 @@ const requestImages = async (searchQuery, isFirstLoad = true) => {
       loadMoreBtnEl.classList.remove('d-none');
     }
   } catch (error) {
+    loadMoreBtnEl.classList.add('d-none');
     console.error('Error fetching images:', error);
     iziToast.error({
       message: 'Error fetching images. Please try again later.',
@@ -89,6 +90,7 @@ if (formEl) {
     const inputValue = formEl.elements.search.value.trim();
 
     if (!inputValue) {
+      loadMoreBtnEl.classList.add('d-none');
       iziToast.error({
         message: 'Please enter a search term',
         position: 'topRight',
