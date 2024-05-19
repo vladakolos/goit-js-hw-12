@@ -29,7 +29,6 @@ const requestImages = async (searchQuery, isFirstLoad = true) => {
     const data = await fetchImages(searchQuery, page);
 
     if (data.data.total === 0) {
-      loadMoreBtnEl.classList.add('d-none');
       iziToast.error({
         message:
           'Sorry, there are no images matching your search query. Please try again!',
@@ -37,7 +36,7 @@ const requestImages = async (searchQuery, isFirstLoad = true) => {
         class: 'error',
         color: 'white',
       });
-
+      loadMoreBtnEl.classList.add('d-none');
       return;
     }
 
@@ -69,7 +68,6 @@ const requestImages = async (searchQuery, isFirstLoad = true) => {
       loadMoreBtnEl.classList.remove('d-none');
     }
   } catch (error) {
-    loadMoreBtnEl.classList.add('d-none');
     console.error('Error fetching images:', error);
     iziToast.error({
       message: 'Error fetching images. Please try again later.',
@@ -77,6 +75,7 @@ const requestImages = async (searchQuery, isFirstLoad = true) => {
       class: 'error',
       color: 'white',
     });
+    loadMoreBtnEl.classList.add('d-none');
   } finally {
     loaderEl.classList.add('is-hidden');
   }
@@ -90,13 +89,13 @@ if (formEl) {
     const inputValue = formEl.elements.search.value.trim();
 
     if (!inputValue) {
-      loadMoreBtnEl.classList.add('d-none');
       iziToast.error({
         message: 'Please enter a search term',
         position: 'topRight',
         class: 'error',
         color: 'white',
       });
+      loadMoreBtnEl.classList.add('d-none');
       loaderEl.classList.add('is-hidden');
       return;
     }
