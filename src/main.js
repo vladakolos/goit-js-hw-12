@@ -29,6 +29,7 @@ const requestImages = async (searchQuery, isFirstLoad = true) => {
     const data = await fetchImages(searchQuery, page);
 
     if (data.data.total === 0) {
+      loadMoreBtnEl.classList.add('d-none');
       iziToast.error({
         message:
           'Sorry, there are no images matching your search query. Please try again!',
